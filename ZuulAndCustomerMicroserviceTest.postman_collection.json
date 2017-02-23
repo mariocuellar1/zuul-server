@@ -1,0 +1,115 @@
+{
+	"variables": [],
+	"info": {
+		"name": "ZuulAndCustomerMicroserviceTest",
+		"_postman_id": "379dfef7-ae9c-0691-614f-586515534138",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Token - password",
+			"request": {
+				"url": "http://localhost:40051/oauth/token",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Basic YWNtZTphY21lc2VjcmV0",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "grant_type",
+							"value": "password",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "username",
+							"value": "user1",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "password",
+							"value": "password1",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "scope",
+							"value": "read",
+							"type": "text",
+							"enabled": true
+						}
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Get all customers using Zuul",
+			"request": {
+				"url": "http://localhost:19001/customers",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer 096de315-5082-4f28-b5b2-daf79b3e2977",
+						"description": ""
+					}
+				],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Get all customers Direct to MicroService",
+			"request": {
+				"url": "http://localhost:20031/customers",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer 096de315-5082-4f28-b5b2-daf79b3e2977",
+						"description": ""
+					}
+				],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Add Customers Zuul",
+			"request": {
+				"url": "http://localhost:19001/customers",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer 096de315-5082-4f28-b5b2-daf79b3e2977",
+						"description": ""
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"firstName\": \"Pedro{{$randomInt}}\",\n\t\"lastName\": \"Perez{{$randomInt}}\"\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}

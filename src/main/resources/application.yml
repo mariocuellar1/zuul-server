@@ -1,0 +1,20 @@
+spring:
+    application:
+        name: zuul-primary-gateway
+security:
+    basic:
+        enabled: false
+server:
+    port: 19001
+zuul:
+    ignoredServices: '*'
+    routes:
+        customers:
+            path: /customers/**
+            serviceId: CUSTOMERS-MICROSERVICE
+            sensitive-headers: Cookie,Set-Cookie
+            stripPrefix: false
+eureka:
+    client:
+        serviceUrl:
+            defaultZone: http://localhost:17001/eureka/
